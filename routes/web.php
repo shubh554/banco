@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('delUser/{id}',[UserController::class,'delete']);
     Route::get('manageMechanicContacts',[ContactController::class,'mechanic']);
     Route::post('addMechanic',[ContactController::class,'add_mechanic']);
+    Route::get('managePremiumDealerContacts',[ContactController::class,'PremiumDealer']);
+    Route::post('addPremiumDealer',[ContactController::class,'AddPremiumDealer']);
     Route::get('manageTemplates',[TemplateController::class,'index']);
     Route::post('addTemplate',[TemplateController::class,'add']);
     Route::get('delTemp/{id}',[TemplateController::class,'delete']);

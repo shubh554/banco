@@ -314,7 +314,7 @@
                                     <span data-key="t-tasks">Manage Contacts</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="#" key="t-task-list">Premium Dealers</a></li>
+                                    <li><a href="managePremiumDealerContacts" key="t-task-list">Premium Dealers</a></li>
                                     <li><a href="#" key="t-kanban-board">Dealers</a></li>
                                     <li><a href="#" key="t-kanban-board">Distributors</a></li>
                                     <li><a href="#" key="t-kanban-board">Retailers</a></li>
