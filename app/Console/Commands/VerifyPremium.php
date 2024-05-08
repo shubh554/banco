@@ -27,7 +27,7 @@ class VerifyPremium extends Command
     public function handle()
     {
         $firstTwoRecords = Premium_Dealer_Contact::where('verified', 2)->take(2)->get();
-        $firstTwoRecords = $firstTwoRecords->toArray();
+        $firstTwoRecords = $firstTwoRecords->toArray(); 
 
         foreach($firstTwoRecords as $item)
         {
@@ -48,6 +48,20 @@ class VerifyPremium extends Command
                     if($resultObject->result)
                     {
                         Premium_Dealer_Contact::where('id', $id)->update(['verified' => 1]); 
+                        try {
+                            // Make POST request with JSON payload
+                            $client1 = new Client();
+                            $response1 = $client1->post('https://phone.watverifyapi.live/send-wa-message/post', [
+                                'json' => [
+                                    'api_key' => 'API-X-581526571984653594294354442-P-API',
+                                    'phone' => '91'.$mobile,
+                                    'message' => 'Welcome to our WhatsApp Channel! 🎉 We are thrilled to have you onboard.Get ready for all the latest updates delivered straight to your fingertips.Have any questions or need assistance? Feel free to reach out to us directly through this channel. Lets stay connected!'
+                                ]
+                            ]);
+                        } catch (\Exception $e) {
+                               
+                        }
+                        
                     }
                     else
                     {

@@ -138,21 +138,7 @@ class ContactController extends Controller
                 if(is_string($mobile) && preg_match('/^\d{10}$/', $mobile))
                {
                 
-               
-                // try {
-                //     // Make POST request with JSON payload
-                //     $client1 = new Client();
-                //     $response1 = $client1->post('https://phone.watverifyapi.live/send-wa-message/post', [
-                //         'json' => [
-                //             'api_key' => 'API-X-581526571984653594294354442-P-API',
-                //             'phone' => '91'.$data[4],
-                //             'message' => 'Dear Customer,We are excited to welcome you to our latest update on WhatsApp! 🎉'
-                //         ]
-                //     ]);
-                // } catch (\Exception $e) {
-                   
-                // }
-                $contactExists = Premium_Dealer_Contact::where('mobile', $mobile)->exists();
+               $contactExists = Premium_Dealer_Contact::where('mobile', $mobile)->exists();
                 
                 if(!$contactExists)
                 DB::table('premium_dealer_contact')->insert([
