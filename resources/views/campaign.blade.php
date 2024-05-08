@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Manage Campaigns</h4>
+                        <h4 class="mb-sm-0 font-size-18">Manage Communications</h4>
                         <!-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -50,7 +50,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Manage Campaigns</li>
+                                <li class="breadcrumb-item active">Manage Communications</li>
                             </ol>
                         </div>
     
@@ -65,8 +65,7 @@
                     <div class="card">
                         <div class="card-header" style="display:flex;justify-content:space-between">
                         <div>   
-                        <h4 class="card-title">Manage Campaigns</h4>
-                            <p class="card-title-desc">Welcome to the Campaign Management section! Here, you have the power to oversee your campaigns, view past endeavors, and refine your strategies for future success.
+                     <p class="card-title-desc">Welcome to the Communication Management section! Here, you have the power to oversee your communications, view past endeavors, and refine your strategies for future success.
 
 
 
@@ -84,29 +83,20 @@
                                     <th>Name</th>
                                     <th>Template</th>
                                     <th>Audience</th>
-                                    <th>Actions</th>
+                                 
                                 </tr>
                                 </thead>
     
     
                                 <tbody>
-                                    {{-- @foreach($templates as $row)
+                                    @foreach($communications as $row)
                                 <tr>
                                     <td>{{$row['name']}}</td>
-                                    <td>{{$row['message']}}</td>
-                                    <td>
-                                        @if($row['status'] == 'pending')
-                                        <button type="button" class="btn btn-soft-light waves-effect waves-light"><i class="bx bx-hourglass font-size-16 align-middle"></i></button>
-                                        @else
-                                        <button type="button" class="btn btn-soft-success waves-effect waves-light"><i class="bx bx-check-double font-size-16 align-middle"></i></button>
-                                        @endif
-                                    </td>
-                                    <td><button type="button" class="btn btn-soft-primary waves-effect waves-light"data-bs-toggle="tooltip" data-bs-placement="bottom" title="View"><i class="fas fa-eye" ></i></button>
-                                    <button type="button" class="btn btn-soft-success waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>
-                                    <button onclick="window.location=`delTemp/{{$row['id']}}`"  type="button" class="btn btn-soft-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bx bx-block font-size-16 align-middle"></i></button>
-                                </td>
+                                    <td>{{$row['template']}}</td>
+                                    <td>{{$row['audience']}}</td>  
+                                  
                                 </tr>
-                                @endforeach --}}
+                                @endforeach
                                </tbody>
                             </table>
                         </div>
@@ -122,40 +112,37 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="myModalLabel">Add New Template</h5>
+                                                                <h5 class="modal-title" id="myModalLabel">Send Message</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                            <form action="addTemplate" method="post">
+                                                            <form action="addCampaign" method="post">
                                                                 @csrf
                                                             <div class="mb-3">
                                                             <label for="example-text-input" class="form-label">Name</label>
                                                             <input class="form-control" type="text" value="" placeholder
-                                                            ="Enter user's name" id="example-text-input"
-                                                            required data-pristine-required-message="Please Enter template name"
+                                                            ="Enter communication name/purpose" id="example-text-input"
+                                                            required data-pristine-required-message="Please Enter Communication name/purpose"
                                                             name = "name"
                                                             >
                                                            </div>
                                                            <div class="mb-3">
-                                                            <label for="choices-single-default" class="form-label font-size-13 text-muted">Audience</label>
-                                                            <select class="form-control" data-trigger name="choices-single-default"
-                                                                id="choices-single-default"
-                                                                placeholder="This is a search placeholder">
-                                                                
-                                                                <option value="Choice 1">Choice 1</option>
-                                                                <option value="Choice 2">Choice 2</option>
-                                                                <option value="Choice 3">Choice 3</option>
-                                                            </select>
+                                                            <label for="choices-single-default" class="form-label font-size-13 text-muted">Mobile</label>
+                                                            <input class="form-control" type="text" value="" placeholder
+                                                            ="Enter user's mobile number" id="example-text-input"
+                                                            required data-pristine-required-message="Please Enter Mobile Number"
+                                                            name = "audience"
+                                                            >
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="choices-single-default" class="form-label font-size-13 text-muted">Templete</label>
-                                                            <select class="form-control" data-trigger name="choices-single-default"
+                                                            <select class="form-control" data-trigger 
                                                                 id="choices-single-default"
+                                                                name = "template"
                                                                 placeholder="This is a search placeholder">
-                                                                
-                                                                <option value="Choice 1">Choice 1</option>
-                                                                <option value="Choice 2">Choice 2</option>
-                                                                <option value="Choice 3">Choice 3</option>
+                                                                @foreach($templates as $item) 
+                                                                <option value="{{$item->name}}">{{$item->name}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                         <div class="mb-3">

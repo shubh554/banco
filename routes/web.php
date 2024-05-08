@@ -29,5 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::post('addTemplate',[TemplateController::class,'add']);
     Route::get('delTemp/{id}',[TemplateController::class,'delete']);
     Route::get('manageCampaigns',[CampaignController::class,'index']);
+    Route::post('addCampaign',[CampaignController::class,'AddCampaign']);
 
 });
