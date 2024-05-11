@@ -19,10 +19,10 @@ class AudienceController extends Controller
         
         $validated = $request->validate([
             'name' => 'required',
-            'state' => 'required|string|max:255',
-            'category' => 'required|string|max:100',
-            'segment' => 'required|string|max:100',
-            'city' => 'required|string|max:255',
+            'state' => 'required|list|max:255',
+            'category' => 'required|list|max:100',
+            'segment' => 'required|list|max:100',
+            'city' => 'required|list|max:255',
         ]);
         
         $model = new Audience();
