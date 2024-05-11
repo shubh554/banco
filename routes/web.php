@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\AudienceController;
 
 
 
@@ -30,5 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('delTemp/{id}',[TemplateController::class,'delete']);
     Route::get('manageCampaigns',[CampaignController::class,'index']);
     Route::post('addCampaign',[CampaignController::class,'AddCampaign']);
+    Route::get('manageAudience',[AudienceController::class,'index']);
+    Route::post('addAudience',[AudienceController::class,'add']);
+    Route::get('delAudience/{id}',[AudienceController::class,'delete']);
 
 });

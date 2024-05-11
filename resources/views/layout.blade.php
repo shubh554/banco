@@ -332,7 +332,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="manageTemplates" key="t-task-list">Templates</a></li>
-                                    <li><a href="#" key="t-kanban-board">Audience</a></li>
+                                    <li><a href="manageAudience" key="t-kanban-board">Audience</a></li>
                                     <li><a href="manageCampaigns" key="t-create-task">Communications</a></li>
                                 </ul>
                             </li>
@@ -548,6 +548,8 @@
         <script src="assets/libs/%40simonwep/pickr/pickr.min.js"></script>
         <script src="assets/libs/%40simonwep/pickr/pickr.es5.min.js"></script>
         <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
+         <script src="assets/js/pages/form-advanced.init.js"></script>
+         <script src="assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
         
 </body>
 </html>

@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Manage Users</h4>
+                        <h4 class="mb-sm-0 font-size-18">Manage Templates</h4>
                         <!-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -50,7 +50,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Manage Users</li>
+                                <li class="breadcrumb-item active">Manage Audience</li>
                             </ol>
                         </div>
     
@@ -65,7 +65,7 @@
                     <div class="card">
                         <div class="card-header" style="display:flex;justify-content:space-between">
                         <div>   
-                        <h4 class="card-title">Manage Templates</h4>
+                        <h4 class="card-title">Template List</h4>
                             <p class="card-title-desc">Welcome to Template Management section! Here, you can effortlessly manage temple messages for sending to users.
                                  Check their approval status from WhatsApp, all in one place.
                              </div>
