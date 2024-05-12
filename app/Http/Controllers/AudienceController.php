@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Audience;
+use App\Models\City;
 
 class AudienceController extends Controller
 {
     public function index(Request $request)
     {
         $list = Audience::all();
-        return view('audience',['list'=>$list->toArray()]);
+        $state = City::distinct()->pluck('state');
+        $city = City::distinct()->pluck('city');
+        $data = [
+                 'list'=>$list->toArray(),
+                 'state_list'=> $state->toArray(),
+                 'city_list'=> $city->toArray()
+                ];
+                
+        return view('audience',$data);
     }
 
     public function add(Request $request)
@@ -19,10 +28,10 @@ class AudienceController extends Controller
         
         $validated = $request->validate([
             'name' => 'required',
-            'state' => 'required|list|max:255',
-            'category' => 'required|list|max:100',
-            'segment' => 'required|list|max:100',
-            'city' => 'required|list|max:255',
+            'state' => 'sometimes|list|max:255',
+            'category' => 'sometimes|list|max:100',
+            'segment' => 'sometimes|list|max:100',
+            'city' => 'sometimes|list|max:255',
         ]);
         
         $model = new Audience();
