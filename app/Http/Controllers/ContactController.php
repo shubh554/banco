@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use SplFileObject;
 use App\Models\Mechanic_Contact;
 use App\Models\Premium_Dealer_Contact;
+use App\Models\City;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
 
@@ -46,26 +46,13 @@ class ContactController extends Controller
             if (count($data) != 15) {
                 continue;
             }
+            
             $mobile = $data[4];
             if($count)
             {
                if(is_string($mobile) && preg_match('/^\d{10}$/', $mobile))
                {
                 
-               
-                // try {
-                //     // Make POST request with JSON payload
-                //     $client1 = new Client();
-                //     $response1 = $client1->post('https://phone.watverifyapi.live/send-wa-message/post', [
-                //         'json' => [
-                //             'api_key' => 'API-X-581526571984653594294354442-P-API',
-                //             'phone' => '91'.$data[4],
-                //             'message' => 'Dear Customer,We are excited to welcome you to our latest update on WhatsApp! 🎉'
-                //         ]
-                //     ]);
-                // } catch (\Exception $e) {
-                   
-                // }
                 $contactExists = Mechanic_Contact::where('mobile', $mobile)->exists();
                 
                 if(!$contactExists)
@@ -138,7 +125,7 @@ class ContactController extends Controller
                 if(is_string($mobile) && preg_match('/^\d{10}$/', $mobile))
                {
                 
-               $contactExists = Premium_Dealer_Contact::where('mobile', $mobile)->exists();
+                $contactExists = Premium_Dealer_Contact::where('mobile', $mobile)->exists();
                 
                 if(!$contactExists)
                 DB::table('premium_dealer_contact')->insert([
