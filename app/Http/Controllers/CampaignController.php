@@ -70,7 +70,7 @@ class CampaignController extends Controller
                 'token' => 'o2uznzefj6qyd2oj',
                 'to' => $request->audience,
                 'filename' => 'banco.pdf',
-                'document' => $templatep['file'],
+                'document' => $template['file'],
                 'caption' => $template['message']
                 );
         }
