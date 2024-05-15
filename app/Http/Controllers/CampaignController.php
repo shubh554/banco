@@ -43,30 +43,63 @@ class CampaignController extends Controller
 
         $template = Template::where('name', $validatedData['template'])->first();
         $template = $template->toArray();
-        
-       
+
+        if($template['type'] == 'chat')
+        {
+            $url = 'https://api.ultramsg.com/instance85736/messages/chat';
             $params=array(
                 'token' => 'o2uznzefj6qyd2oj',
-                'to' => '+919161760876',
-                'body' => 'WhatsApp API on UltraMsg.com works good'
+                'to' => $request->audience,
+                'body'=>$template['message']
+                );
+        }
+        if($template['type'] == 'image')
+        {
+           $url = 'https://api.ultramsg.com/instance85736/messages/image';
+           $params=array(
+            'token' => 'o2uznzefj6qyd2oj',
+            'to' => $request->audience,
+            'image' => $template['file'],
+            'caption' => $template['message']
             );
-            $headers = [
-                'Content-Type' => 'application/x-www-form-urlencoded'
-            ];
-            $options = ['form_params' =>$params ];
-            $client1 = new Client();
-            $response1 = $client1->post('https://api.ultramsg.com/instance85736/messages/chat', [
-                'form_params' => [
-                    'token' => 'o2uznzefj6qyd2oj',
-                    'to' => '+919161760876',
-                    'body' => 'WhatsApp API on UltraMsg.com works good'
-                
-                ],
-                'headers' => [
-                    'Content-Type' => 'application/x-www-form-urlencoded',
-                   
-                ]
-            ]);
+        }
+        if($template['type'] == 'pdf')
+        {
+            $url = 'https://api.ultramsg.com/instance85736/messages/document';
+            $params=array(
+                'token' => 'o2uznzefj6qyd2oj',
+                'to' => $request->audience,
+                'filename' => 'banco.pdf',
+                'document' => $templatep['file'],
+                'caption' => $template['message']
+                );
+        }
+        
+       
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_SSL_VERIFYHOST => 0,
+        CURLOPT_SSL_VERIFYPEER => 0,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => http_build_query($params),
+        CURLOPT_HTTPHEADER => array(
+            "content-type: application/x-www-form-urlencoded"
+        ),
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        
+        curl_close($curl);
+    
+  
         
 
         return redirect()->back()->with('success', 'Communication added successfully!');

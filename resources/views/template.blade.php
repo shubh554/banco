@@ -80,6 +80,7 @@
                                     <th>Name</th>
                                     <th>Text</th>
                                     <th>Status</th>
+                                    <th>File</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -94,6 +95,17 @@
                                         @else
                                         <button type="button" class="btn btn-soft-success waves-effect waves-light"><i class="bx bx-check-double font-size-16 align-middle"></i></button>
                                         @endif
+                                    </td>
+                                    <td>
+                                        @if($row['type'] == 'chat')
+                                       <p>This is a chat message</p>
+                                       @endif
+                                       @if($row['type'] == 'image')
+                                       <img src="{{$row['file']}}" height="80px" width="80px"/>
+                                       @endif
+                                       @if($row['type'] == 'pdf')
+                                       <a style="color:blue" href="{{$row['file']}}" target="_blank">document link</a>
+                                       @endif
                                     </td>
                                     <td><button type="button" class="btn btn-soft-primary waves-effect waves-light"data-bs-toggle="tooltip" data-bs-placement="bottom" title="View"><i class="fas fa-eye" ></i></button>
                                     <button type="button" class="btn btn-soft-success waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>
@@ -120,7 +132,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                            <form action="addTemplate" method="post">
+                                                            <form action="addTemplate" method="post" enctype="multipart/form-data">
                                                                 @csrf
                                                             <div class="mb-3">
                                                             <label for="example-text-input" class="form-label">Name</label>
@@ -129,6 +141,19 @@
                                                             required data-pristine-required-message="Please Enter template name"
                                                             name = "name"
                                                             >
+                                                           </div>
+                                                           <div class="mb-3">
+                                                            <label for="choices-single-default" class="form-label font-size-13 text-muted">Message Type</label>
+                                                            <select class="form-control" data-trigger name="type"
+                                                                id="choices-single-default" onchange="messageType(this)"
+                                                                placeholder="This is a search placeholder">
+                                                                 <option value="chat">Chat</option>
+                                                                <option value="image">Image</option>
+                                                                <option value="pdf">PDF</option>
+                                                            </select>
+                                                           </div>
+                                                           <div class="mb-3" id="fileType" style="display:none">
+                                                            <input type="file" name="file"/>
                                                            </div>
                                                            <div class="mb-3">
                                                             <label for="example-text-input" class="form-label">Message</label><br>
@@ -140,5 +165,18 @@
                                                         </div><!-- /.modal-content -->
                                                     </div><!-- /.modal-dialog -->
                                                 </div><!-- /.modal -->
-    
+<script>
+function messageType(obj)
+{
+ 
+  if(obj.value != 'chat')
+  {
+    document.getElementById('fileType').style.display = 'block'; 
+  }
+  else
+  {
+    document.getElementById('fileType').style.display = 'none'; 
+ }
+}    
+</script>    
 @endsection
