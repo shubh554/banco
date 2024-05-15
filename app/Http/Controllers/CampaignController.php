@@ -9,6 +9,7 @@ use App\Models\Communication;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class CampaignController extends Controller
 {
@@ -43,19 +44,30 @@ class CampaignController extends Controller
         $template = Template::where('name', $validatedData['template'])->first();
         $template = $template->toArray();
         
-        try {
-            // Make POST request with JSON payload
+       
+            $params=array(
+                'token' => 'o2uznzefj6qyd2oj',
+                'to' => '+919161760876',
+                'body' => 'WhatsApp API on UltraMsg.com works good'
+            );
+            $headers = [
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ];
+            $options = ['form_params' =>$params ];
             $client1 = new Client();
-            $response1 = $client1->post('https://phone.watverifyapi.live/send-wa-message/post', [
-                'json' => [
-                    'api_key' => 'API-X-581526571984653594294354442-P-API',
-                    'phone' => '91'.$validatedData['audience'],
-                    'message' =>$template['message']
+            $response1 = $client1->post('https://api.ultramsg.com/instance85736/messages/chat', [
+                'form_params' => [
+                    'token' => 'o2uznzefj6qyd2oj',
+                    'to' => '+919161760876',
+                    'body' => 'WhatsApp API on UltraMsg.com works good'
+                
+                ],
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                   
                 ]
             ]);
-        } catch (\Exception $e) {
-           print_r($e);die();      
-        }
+        
 
         return redirect()->back()->with('success', 'Communication added successfully!');
 
