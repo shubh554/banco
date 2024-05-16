@@ -34,33 +34,61 @@ class VerifyPremium extends Command
             $mobile = $item['mobile'];
             $id = $item['id'];
             $verified = false;
+            //checking valid number
 
-              $client = new Client();
-                $url = 'https://phone.watverifyapi.live/is-whatsapp-no/get?api_key=API-X-581526571984653594294354442-P-API&phone=91'.$mobile;
-
-                try {
-                    // Make GET request to the API
-                    $response = $client->get($url);
-        
-                    // Get response body as string
-                    $res = $response->getBody()->getContents();
-                    $resultObject = json_decode($res);
-                    if($resultObject->result)
+            $params=array(
+                'token' => 'o2uznzefj6qyd2oj',
+                'chatId' => '9161760876',
+                'nocache' => 'true'
+                );
+                $curl = curl_init();
+                
+                curl_setopt_array($curl, array(
+                  CURLOPT_URL => "https://api.ultramsg.com/instance85736/contacts/check?" .http_build_query($params),
+                  CURLOPT_RETURNTRANSFER => true,
+                  CURLOPT_ENCODING => "",
+                  CURLOPT_MAXREDIRS => 10,
+                  CURLOPT_TIMEOUT => 30,
+                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                  CURLOPT_CUSTOMREQUEST => "GET",
+                  CURLOPT_HTTPHEADER => array(
+                    "content-type: application/x-www-form-urlencoded"
+                  ),
+                ));
+                
+                $response = curl_exec($curl);
+                $response = json_decode($response);
+               
+                if($response->status == 'valid')
                     {
                         Premium_Dealer_Contact::where('id', $id)->update(['verified' => 1]); 
-                        try {
-                            // Make POST request with JSON payload
-                            $client1 = new Client();
-                            $response1 = $client1->post('https://phone.watverifyapi.live/send-wa-message/post', [
-                                'json' => [
-                                    'api_key' => 'API-X-581526571984653594294354442-P-API',
-                                    'phone' => '91'.$mobile,
-                                    'message' => 'Welcome to our WhatsApp Channel! 🎉 We are thrilled to have you onboard.Get ready for all the latest updates delivered straight to your fingertips.Have any questions or need assistance? Feel free to reach out to us directly through this channel. Lets stay connected!'
-                                ]
-                            ]);
-                        } catch (\Exception $e) {
-                               
-                        }
+                        $url = 'https://api.ultramsg.com/instance85736/messages/chat';
+                        $params=array(
+                            'token' => 'o2uznzefj6qyd2oj',
+                            'to' => $mobile,
+                            'body'=>'Welcome to our WhatsApp Channel! 🎉 We are thrilled to have you onboard.Get ready for all the latest updates delivered straight to your fingertips.Have any questions or need assistance? Feel free to reach out to us directly through this channel. Lets stay connected!'
+                            );
+                            $curl = curl_init();
+                            curl_setopt_array($curl, array(
+                            CURLOPT_URL => $url,
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => "",
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 30,
+                            CURLOPT_SSL_VERIFYHOST => 0,
+                            CURLOPT_SSL_VERIFYPEER => 0,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => "POST",
+                            CURLOPT_POSTFIELDS => http_build_query($params),
+                            CURLOPT_HTTPHEADER => array(
+                                "content-type: application/x-www-form-urlencoded"
+                            ),
+                            ));
+                        
+                            $response = curl_exec($curl);
+                            $err = curl_error($curl);
+                            
+                            curl_close($curl);
                         
                     }
                     else
@@ -69,10 +97,7 @@ class VerifyPremium extends Command
                     }
                   
                   
-                } catch (\Exception $e) {
-                    // Handle any exceptions or errors
-                    print_r($e);
-                }
+                
         }
     }
 }
