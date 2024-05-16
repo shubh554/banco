@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use App\Models\Premium_Dealer_Contact;
+
 
 class CampaignController extends Controller
 {
@@ -26,7 +28,7 @@ class CampaignController extends Controller
       
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'audience' => 'required|string',
+            'audience' => 'sometimes|string',
             'template' => 'required|string',
         ]);
         
@@ -37,7 +39,7 @@ class CampaignController extends Controller
 
         DB::table('communications')->insert([
               'name'=> $validatedData['name'],
-              'audience' => $validatedData['audience'],
+              'audience' => 'Test',
               'template' => $validatedData['template']
         ]);
 
@@ -74,9 +76,13 @@ class CampaignController extends Controller
                 'caption' => $template['message']
                 );
         }
-        
-       
 
+        $contacts = Premium_Dealer_Contact::all();
+        $contacts = $contacts->toArray();
+        
+        foreach($contacts as $row)
+        {
+        $params['to'] = $row['mobile'];  
         $curl = curl_init();
         curl_setopt_array($curl, array(
         CURLOPT_URL => $url,
@@ -98,13 +104,8 @@ class CampaignController extends Controller
         $err = curl_error($curl);
         
         curl_close($curl);
-    
-  
-        
+        }
 
-        return redirect()->back()->with('success', 'Communication added successfully!');
-
-
-
-    }
+     return redirect()->back()->with('success', 'Communication added successfully!');
+   }
 }

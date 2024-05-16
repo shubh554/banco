@@ -18,7 +18,7 @@ class TemplateController extends Controller
     {
         $rules =[
             'name' => 'required|string',
-            'message' => 'required|string',
+            'message' => 'required|string|max:1000',
             'type' => 'required|string|in:chat,image,pdf',
             'file' => 'sometimes|file|max:15360'
         ];

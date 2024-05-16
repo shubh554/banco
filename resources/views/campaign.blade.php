@@ -127,12 +127,12 @@
                                                             >
                                                            </div>
                                                            <div class="mb-3">
-                                                            <label for="choices-single-default" class="form-label font-size-13 text-muted">Mobile</label>
+                                                            <label for="choices-single-default" class="form-label font-size-13 text-muted">Audience</label>
                                                             <input class="form-control" type="text" value="" placeholder
-                                                            ="Enter user's mobile number" id="example-text-input"
+                                                            ="Premium Dealers" id="example-text-input"
                                                             required data-pristine-required-message="Please Enter Mobile Number"
-                                                            name = "audience"
-                                                            >
+                                                            name = "audience" value="Premium Dealers"
+                                                            disabled>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="choices-single-default" class="form-label font-size-13 text-muted">Templete</label>
@@ -150,7 +150,8 @@
                                                             <select class="form-control" data-trigger name="choices-single-default"
                                                                 id="choices-single-default"
                                                                 placeholder="This is a search placeholder">
-                                                                 <option value="Choice 1">Daily</option>
+                                                                <option value="Choice 1">No-Repeat</option> 
+                                                                <option value="Choice 1">Daily</option>
                                                                 <option value="Choice 2">Weekly</option>
                                                                 <option value="Choice 3">Monthly</option>
                                                             </select>
