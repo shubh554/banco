@@ -39,6 +39,10 @@ class TemplateController extends Controller
             $file->storeAs('uploads', $filename, 'public');
             $fileUrl = asset('storage/uploads/' . $filename);
         }
+        else
+        {
+            $fileUrl = null;
+        }
 
 
         //inserting the record
