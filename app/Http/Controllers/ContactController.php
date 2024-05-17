@@ -220,6 +220,6 @@ class ContactController extends Controller
             }
             $count++;
         }  
-        return redirect()->back()->with('success', 'Premium Dealers added successfully!');
+        return redirect()->back()->with('success', 'Banco Staff added successfully!');
       }
 }

@@ -9,3 +9,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command('app:verify-premium')->everyMinute();
+Schedule::command('app:verify-staff')->everyMinute();
