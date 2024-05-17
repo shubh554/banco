@@ -6,6 +6,7 @@ use SplFileObject;
 use App\Models\Mechanic_Contact;
 use App\Models\Premium_Dealer_Contact;
 use App\Models\City;
+use App\Models\Banco_Staff_Contact;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
 
@@ -145,6 +146,69 @@ class ContactController extends Controller
                     'Agriculture' => $data[13],
                     'Tractor' => $data[14],
                     'created_at' => now(),
+                    'updated_at' => now(),
+                    'verified'=>2
+                ]);
+               }
+               else
+               {
+                 continue;
+               }
+            }
+            $count++;
+        }  
+        return redirect()->back()->with('success', 'Premium Dealers added successfully!');
+      }
+
+      public function BancoStaff(Request $request)
+      {
+        $contacts = Banco_Staff_Contact::all();
+       
+        return view('staff',['list'=>$contacts]);
+      }
+
+      public function AddBancoStaff(Request $request)
+      {
+        $request->validate([
+            'excel_file' => 'required|file|mimes:csv,txt',
+        ]);
+    
+        $file = $request->file('excel_file');
+    
+        // Open the CSV file
+        $csv = new SplFileObject($file->getPathname());
+        
+        $count = 0;
+        // Loop through each row
+        while (!$csv->eof()) {
+        
+            $data = $csv->fgetcsv();
+            if (!array_filter($data)) {
+                continue; 
+            }
+           
+            if (count($data) != 6) {
+                continue;
+            }
+            $mobile = $data[5];
+            
+            if($count)
+            {
+             
+                if(is_string($mobile) && preg_match('/^\d{10}$/', $mobile))
+               {
+                
+                $contactExists = Banco_Staff_Contact::where('mobile', $mobile)->exists();
+                
+                if(!$contactExists)
+                DB::table('banco_staff_contacts')->insert([
+                    'Zone' => $data[0],
+                    'State' => $data[1],
+                    'city' => $data[2],
+                    'name' => $data[3],
+                    'SAP_Code' => $data[4],
+                    'mobile' => $data[5],
+                     'created_at' => now(),
                     'updated_at' => now(),
                     'verified'=>2
                 ]);

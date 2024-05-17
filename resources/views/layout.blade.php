@@ -320,7 +320,7 @@
                                     <li><a href="#" key="t-kanban-board">Retailers</a></li>
                                     <li><a href="manageMechanicContacts" key="t-kanban-board">Mechanics</a></li>
                                     <li><a href="#" key="t-kanban-board">Fleets</a></li>
-                                    <li><a href="#" key="t-kanban-board">Banco Staff</a></li>
+                                    <li><a href="manageBancoStaffContacts" key="t-kanban-board">Banco Staff</a></li>
                                   
                                 </ul>
                             </li>
