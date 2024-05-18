@@ -38,4 +38,6 @@ Route::middleware('auth')->group(function () {
     Route::post('addBancoStaff',[ContactController::class,'AddBancoStaff']);
     Route::get('manageDealerContacts',[ContactController::class,'Dealer']);
     Route::post('addDealer',[ContactController::class,'AddDealer']);
+    Route::get('manageDistributorContacts',[ContactController::class,'Distributor']);
+    Route::post('addDistributor',[ContactController::class,'AddDistributor']);
 });

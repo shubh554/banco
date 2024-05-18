@@ -10,6 +10,7 @@ use App\Models\Banco_Staff_Contact;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
 use App\Models\Dealer_Contact;
+use App\Models\Distributor_Contact;
 
 class ContactController extends Controller
 {
@@ -295,4 +296,76 @@ class ContactController extends Controller
         }  
         return redirect()->back()->with('success', 'Dealers added successfully!');
       }
+
+      public function Distributor(Request $request)
+      {
+        $contacts = Distributor_Contact::all();
+       
+        return view('distributor',['list'=>$contacts]);
+      }
+
+      public function AddDistributor(Request $request)
+      {
+          $request->validate([
+              'excel_file' => 'required|file|mimes:csv,txt',
+          ]);
+      
+          $file = $request->file('excel_file');
+      
+          // Open the CSV file
+          $csv = new SplFileObject($file->getPathname());
+          
+          $count = 0;
+          // Loop through each row
+          while (!$csv->eof()) {
+          
+              $data = $csv->fgetcsv();
+              if (!array_filter($data)) {
+                  continue; 
+              }
+             
+              if (count($data) != 14) {
+                  continue;
+              }
+              $mobile = $data[3];
+              
+              if($count)
+              {
+               
+                  if(is_string($mobile) && preg_match('/^\d{10}$/', $mobile))
+                 {
+                  
+                  $contactExists = Distributor_Contact::where('mobile', $mobile)->exists();
+                  
+                  if(!$contactExists)
+                  DB::table('distributor_contacts')->insert([
+                      'product_type' => $data[0],
+                      'category' => 'Distributor',
+                      'dealer_name' => $data[1],
+                      'customer_name' => $data[2]?$data[2]:$data[1],
+                      'mobile' => $data[3],
+                      'state' => $data[4],
+                      'city' => $data[5],
+                      'area' => $data[6],
+                      '2-Wheeler' => $data[7],
+                      'Car/MUV' => $data[8],
+                      'LCV/HCV' => $data[9],
+                      'Industrial' => $data[10],
+                      'Genset' => $data[11],
+                      'Agriculture' => $data[12],
+                      'Tractor' => $data[13],
+                      'created_at' => now(),
+                      'updated_at' => now(),
+                      'verified'=>2
+                  ]);
+                 }
+                 else
+                 {
+                   continue;
+                 }
+              }
+              $count++;
+          }  
+          return redirect()->back()->with('success', 'Distributors added successfully!');
+        }
 }

@@ -1,31 +1,31 @@
 <?php
 
 namespace App\Console\Commands;
-use App\Models\Dealer_Contact;
+use App\Models\Distributor_Contact;
 use Illuminate\Console\Command;
 
-class VerifyDealer extends Command
+class VerifyDistributor extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:verify-dealer';
+    protected $signature = 'app:verify-distributor';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Verify wether a  dealer contact exists on whatsapp';
+    protected $description = 'Verify wether a  distributor contact exists on whatsapp';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $firstTwoRecords = Dealer_Contact::where('verified', 2)->take(2)->get();
+        $firstTwoRecords = Distributor_Contact::where('verified', 2)->take(2)->get();
         $firstTwoRecords = $firstTwoRecords->toArray(); 
 
         foreach($firstTwoRecords as $item)
@@ -60,11 +60,11 @@ class VerifyDealer extends Command
                
                 if($response->status == 'valid')
                     {
-                        Dealer_Contact::where('id', $id)->update(['verified' => 1]); 
+                        Distributor_Contact::where('id', $id)->update(['verified' => 1]); 
                     }
                     else
                     {
-                        Dealer_Contact::where('id', $id)->update(['verified' => 0]);  
+                        Distributor_Contact::where('id', $id)->update(['verified' => 0]);  
                     }
                   
                   
