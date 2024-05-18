@@ -10,3 +10,4 @@ Artisan::command('inspire', function () {
 //verify commands
 Schedule::command('app:verify-premium')->everyMinute();
 Schedule::command('app:verify-staff')->everyMinute();
+Schedule::command('app:verify-dealer')->everyMinute();

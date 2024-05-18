@@ -1,18 +1,17 @@
 <?php
 
 namespace App\Console\Commands;
-use App\Models\Premium_Dealer_Contact;
+use App\Models\Dealer_Contact;
 use Illuminate\Console\Command;
-use GuzzleHttp\Client;
 
-class VerifyPremium extends Command
+class VerifyDealer extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:verify-premium';
+    protected $signature = 'app:verify-dealer';
 
     /**
      * The console command description.
@@ -26,7 +25,7 @@ class VerifyPremium extends Command
      */
     public function handle()
     {
-        $firstTwoRecords = Premium_Dealer_Contact::where('verified', 2)->take(2)->get();
+        $firstTwoRecords = Dealer_Contact::where('verified', 2)->take(2)->get();
         $firstTwoRecords = $firstTwoRecords->toArray(); 
 
         foreach($firstTwoRecords as $item)
@@ -61,11 +60,11 @@ class VerifyPremium extends Command
                
                 if($response->status == 'valid')
                     {
-                        Premium_Dealer_Contact::where('id', $id)->update(['verified' => 1]); 
+                        Dealer_Contact::where('id', $id)->update(['verified' => 1]); 
                     }
                     else
                     {
-                        Premium_Dealer_Contact::where('id', $id)->update(['verified' => 0]);  
+                        Dealer_Contact::where('id', $id)->update(['verified' => 0]);  
                     }
                   
                   

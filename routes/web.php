@@ -36,5 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::get('delAudience/{id}',[AudienceController::class,'delete']);
     Route::get('manageBancoStaffContacts',[ContactController::class,'BancoStaff']);
     Route::post('addBancoStaff',[ContactController::class,'AddBancoStaff']);
-
+    Route::get('manageDealerContacts',[ContactController::class,'Dealer']);
+    Route::post('addDealer',[ContactController::class,'AddDealer']);
 });
