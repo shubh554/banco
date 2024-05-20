@@ -59,10 +59,18 @@ class CampaignController extends Controller
         {
                    
             $modelInstance = app()->make("App\\Models\\{$item}");
-            $modelResults = $modelInstance::whereIn('state', $audiences['state'])
-            ->whereIn('city', $audiences['city'])
-            ->where('verified',1)
-            ->get();
+            $query = $modelInstance::query();
+            
+            if (!empty($audiences['state'])) {
+                $query->whereIn('state', $audiences['state']);
+            }
+            
+            if (!empty($audiences['city'])) {
+                $query->whereIn('city', $audiences['city']);
+            }
+
+            $query->where('verified', 1);
+            $modelResults = $query->get();
             $contacts = $contacts->merge($modelResults);
 
         }
@@ -70,6 +78,8 @@ class CampaignController extends Controller
         
         
         $filteredContacts = [];
+        if($audiences['segment']  == null)
+        $audiences['segment'] =[];
         foreach($contacts as $item2)
         {
           foreach($audiences['segment'] as $item3)
