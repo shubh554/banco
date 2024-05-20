@@ -169,13 +169,13 @@
                                                             <select class="form-control" data-trigger
                                                             name="category[]" id="choices-multiple-default"
                                                             placeholder="This is a placeholder" multiple>
-                                                                <option value="Premium Dealers">Premium Dealer</option>
-                                                                <option value="Dealers">Dealers</option>
-                                                                <option value="Distributors">Distributors</option>
-                                                                <option value="Retailers">Retailers</option>
-                                                                <option value="Mechanics">Mechanics</option>
-                                                                <option value="Fleets">Fleets</option>
-                                                                <option value="Banco Staff">Banco Staff</option>
+                                                                <option value="Premium_Dealer_Contact">Premium Dealer</option>
+                                                                <option value="Dealer_Contact">Dealers</option>
+                                                                <option value="Distributor_Contact">Distributors</option>
+                                                                <option value="null">Retailers</option>
+                                                                <option value="Mechanic_Contact">Mechanics</option>
+                                                                <option value="null">Fleets</option>
+                                                                <option value="Banco_Staff_Contact">Banco Staff</option>
                                                             </select>
                                                            </div>
                                                         <div class="mb-3">

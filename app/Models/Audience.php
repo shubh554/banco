@@ -17,4 +17,9 @@ class Audience extends Model
     ];
 
     protected $fillable =['name','state','city','category','segement'];
+
+    public function communications()
+    {
+        return $this->hasMany(Communication::class);
+    }
 }

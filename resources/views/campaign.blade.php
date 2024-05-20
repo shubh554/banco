@@ -91,9 +91,9 @@
                                 <tbody>
                                     @foreach($communications as $row)
                                 <tr>
-                                    <td>{{$row['name']}}</td>
-                                    <td>{{$row['template']}}</td>
-                                    <td>{{$row['audience']}}</td>  
+                                    <td>{{$row->name}}</td>
+                                    <td>{{$row->template->name}}</td>
+                                    <td>{{$row->audience->name}}</td>  
                                   
                                 </tr>
                                 @endforeach
@@ -128,20 +128,23 @@
                                                            </div>
                                                            <div class="mb-3">
                                                             <label for="choices-single-default" class="form-label font-size-13 text-muted">Audience</label>
-                                                            <input class="form-control" type="text" value="" placeholder
-                                                            ="Premium Dealers" id="example-text-input"
-                                                            required data-pristine-required-message="Please Enter Mobile Number"
-                                                            name = "audience" value="Premium Dealers"
-                                                            disabled>
+                                                            <select class="form-control" data-trigger 
+                                                                id="choices-single-default"
+                                                                name = "audience_id"
+                                                                placeholder="This is a search placeholder">
+                                                                @foreach($audience as $item) 
+                                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="choices-single-default" class="form-label font-size-13 text-muted">Templete</label>
                                                             <select class="form-control" data-trigger 
                                                                 id="choices-single-default"
-                                                                name = "template"
+                                                                name = "template_id"
                                                                 placeholder="This is a search placeholder">
                                                                 @foreach($templates as $item) 
-                                                                <option value="{{$item->name}}">{{$item->name}}</option>
+                                                                <option value="{{$item->id}}">{{$item->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>

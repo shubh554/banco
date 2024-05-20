@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use App\Models\Premium_Dealer_Contact;
+use App\Models\Audience;
+use Illuminate\Support\Str;
+use App\Models\Message_Log;
 
 
 class CampaignController extends Controller
@@ -18,9 +21,10 @@ class CampaignController extends Controller
     public function index()
     {
         
+        $communications = Communication::with(['template', 'audience'])->get();
+        $audience = Audience::all();
         $templates = Template::all();
-        $communications = Communication::all();
-        return view('campaign',['templates'=>$templates,'communications'=>$communications]);
+        return view('campaign',['templates'=>$templates,'communications'=>$communications,'audience' =>$audience]);
     }
 
     public function AddCampaign(Request $request)
@@ -28,84 +32,70 @@ class CampaignController extends Controller
       
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'audience' => 'sometimes|string',
-            'template' => 'required|string',
+            'audience_id' => 'required',
+            'template_id' => 'required',
         ]);
         
         if ($validator->fails()) {
             print_r($validator->errors());
         }
         $validatedData = $validator->validated();
+        $communicationId = time();
+        //inserting the communication
+        $communication = Communication::create([
+            'name'=> $validatedData['name'],
+            'audience_id' => $validatedData['audience_id'],
+            'template_id' => $validatedData['template_id'],
+            'communication_id' => $communicationId  
+         ]);
+         $lastInsertedId = $communication->id;
 
-        DB::table('communications')->insert([
-              'name'=> $validatedData['name'],
-              'audience' => 'Test',
-              'template' => $validatedData['template']
-        ]);
-
-        $template = Template::where('name', $validatedData['template'])->first();
-        $template = $template->toArray();
-
-        if($template['type'] == 'chat')
+        //creating the message log
+        $audiences = Audience::find($validatedData['audience_id']);
+       
+        $audiences = $audiences->toArray();
+        $contacts = collect([]);
+        foreach($audiences['category'] as $item)
         {
-            $url = 'https://api.ultramsg.com/instance85736/messages/chat';
-            $params=array(
-                'token' => 'o2uznzefj6qyd2oj',
-                'to' => $request->audience,
-                'body'=>$template['message']
-                );
-        }
-        if($template['type'] == 'image')
-        {
-           $url = 'https://api.ultramsg.com/instance85736/messages/image';
-           $params=array(
-            'token' => 'o2uznzefj6qyd2oj',
-            'to' => $request->audience,
-            'image' => $template['file'],
-            'caption' => $template['message']
-            );
-        }
-        if($template['type'] == 'pdf')
-        {
-            $url = 'https://api.ultramsg.com/instance85736/messages/document';
-            $params=array(
-                'token' => 'o2uznzefj6qyd2oj',
-                'to' => $request->audience,
-                'filename' => 'banco.pdf',
-                'document' => $template['file'],
-                'caption' => $template['message']
-                );
-        }
+                   
+            $modelInstance = app()->make("App\\Models\\{$item}");
+            $modelResults = $modelInstance::whereIn('state', $audiences['state'])
+            ->whereIn('city', $audiences['city'])
+            ->where('verified',1)
+            ->get();
+            $contacts = $contacts->merge($modelResults);
 
-        $contacts = Premium_Dealer_Contact::all();
-        $contacts = $contacts->toArray();
+        }
+        $contacts  = $contacts->toArray();
         
-        foreach($contacts as $row)
-        {
-        $params['to'] = $row['mobile'];  
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_SSL_VERIFYHOST => 0,
-        CURLOPT_SSL_VERIFYPEER => 0,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => http_build_query($params),
-        CURLOPT_HTTPHEADER => array(
-            "content-type: application/x-www-form-urlencoded"
-        ),
-        ));
-    
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
         
-        curl_close($curl);
+        $filteredContacts = [];
+        foreach($contacts as $item2)
+        {
+          foreach($audiences['segment'] as $item3)
+          {
+            if( strtolower($item2[$item3]) == 'yes')
+            {
+                array_push($filteredContacts,$item2);
+            }
+            $item2[$item3];
+          }          
+        }
+        if(!empty($filteredContacts))
+        {
+            $contacts = $filteredContacts;
         }
 
-     return redirect()->back()->with('success', 'Communication added successfully!');
+        foreach($contacts as $item4)
+        {
+            Message_Log::create([
+                'mobile' => $item4['mobile'],
+                'template_id'=>$validatedData['template_id'],
+                'communication_id'=>$lastInsertedId,
+
+            ]);
+        }
+        
+         return redirect()->back()->with('success', 'Communication added successfully!');
    }
 }

@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('communications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('audience');
-            $table->string('template');
+            $table->unsignedBigInteger('audience_id');
+            $table->unsignedBigInteger('template_id');
             $table->string('repeat')->nullable();
             $table->timestamps();
+
+            // Add foreign key constraints
+            $table->foreign('audience_id')->references('id')->on('audience')->onDelete('cascade');
+            $table->foreign('template_id')->references('id')->on('templates')->onDelete('cascade');
         });
     }
 

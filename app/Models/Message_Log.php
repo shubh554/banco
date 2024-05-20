@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Template extends Model
+class Message_Log extends Model
 {
     use HasFactory;
+    protected $table = 'message_log';
+    protected $fillable=['mobile','communication_id','template_id','name','status'];
 
-    public function communications()
+    public function template()
     {
-        return $this->hasMany(Communication::class);
+        return $this->belongsTo(Template::class, 'template_id');
     }
 
     public function messageLogs()
