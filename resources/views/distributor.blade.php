@@ -91,7 +91,6 @@
                                     <th>Mobile</th>
                                     <th>City</th>
                                     <th>State</th>
-                                    <th>Area</th>
                                     <th>Two-Wheeler</th>
                                     <th>Car/MUV</th>
                                     <th>LCV/HCV</th>
@@ -100,6 +99,7 @@
                                     <th>Agriculture</th>
                                     <th>Tractor</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -111,7 +111,6 @@
                                         <td>{{$item->mobile}}</td>
                                         <td>{{$item->city}}</td>
                                         <td>{{$item->state}}</td>
-                                        <td>{{$item->area}}</td>
                                         <td>{{ $item->{'2-Wheeler'} }}</td>
                                         <td>{{$item->{'Car/MUV'} }}</td>
                                         <td>{{$item->{'LCV/HCV'} }}</td>
@@ -129,6 +128,9 @@
                                             @if($item->verified == 2)
                                             <span class="badge bg-info-subtle text-info ">Pending</span>
                                             @endif
+                                        </td>
+                                        <td>
+                                            <button onclick="window.location=`delContact/{{$item['id']}}/{{'distributor_contacts'}}`"  type="button" class="btn btn-soft-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bx bx-block font-size-16 align-middle"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach

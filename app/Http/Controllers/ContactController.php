@@ -368,4 +368,10 @@ class ContactController extends Controller
           }  
           return redirect()->back()->with('success', 'Distributors added successfully!');
         }
+
+        public function DeleteContact(Request $request,$id,$table)
+        {
+           DB::table($table)->where('id', $id)->delete();
+           return redirect()->back()->with('success', 'Contact deleted successfully!');
+        }
 }

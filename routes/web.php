@@ -40,4 +40,5 @@ Route::middleware('auth')->group(function () {
     Route::post('addDealer',[ContactController::class,'AddDealer']);
     Route::get('manageDistributorContacts',[ContactController::class,'Distributor']);
     Route::post('addDistributor',[ContactController::class,'AddDistributor']);
+    Route::get('delContact/{id}/{table}',[ContactController::class,'DeleteContact']);
 });
