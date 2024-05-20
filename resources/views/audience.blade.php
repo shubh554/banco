@@ -90,19 +90,25 @@
                                 <tr>
                                     <td>{{$row['name']}}</td>
                                     <td>
+                                        @if($row['state'])
                                         @foreach($row['state'] as $state)    
                                             <span class="badge bg-primary">{{$state}}</span>
                                         @endforeach
+                                        @endif
                                     </td>
                                     <td>
+                                        @if($row['city'])
                                         @foreach($row['city'] as $city)    
                                              <span class="badge bg-primary">{{$city}}</span>
                                         @endforeach
+                                        @endif
                                     </td>
                                     <td>
+                                        @if($row['segment'])
                                         @foreach($row['segment'] as $segment)    
                                              <span class="badge bg-primary">{{$segment}}</span>
                                         @endforeach
+                                        @endif
                                     </td>
                                     <td>
                                         @foreach($row['category'] as $category)    
