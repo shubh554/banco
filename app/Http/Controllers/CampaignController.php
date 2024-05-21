@@ -14,6 +14,7 @@ use App\Models\Premium_Dealer_Contact;
 use App\Models\Audience;
 use Illuminate\Support\Str;
 use App\Models\Message_Log;
+use App\Models\Banco_Staff_Contact;
 
 
 class CampaignController extends Controller
@@ -55,9 +56,26 @@ class CampaignController extends Controller
        
         $audiences = $audiences->toArray();
         $contacts = collect([]);
+        $staffContacts = collect([]);
         foreach($audiences['category'] as $item)
         {
                    
+            if($item == 'Banco_Staff_Contact')
+            {
+                $sap_codes = explode(",", $audiences['SAP_Code']);
+
+                foreach($sap_codes as $sap_code)
+                {
+                    $records = Banco_Staff_Contact::where('SAP_Code', 'like', '%' . $sap_code . '%')
+                                ->where('verified',1)
+                                ->get();
+                    $staffContacts = $staffContacts->merge($records);
+                    echo '<pre>';print_r($staffContacts->toArray());
+                }
+                    
+            }
+            else
+            {
             $modelInstance = app()->make("App\\Models\\{$item}");
             $query = $modelInstance::query();
             
@@ -66,14 +84,18 @@ class CampaignController extends Controller
             }
             
             if (!empty($audiences['city'])) {
-                $query->whereIn('city', $audiences['city']);
+                $query->whereIn('city', $audiences['city']);}
+            
+                $query->where('verified', 1);
+                $modelResults = $query->get();
+                $contacts = $contacts->merge($modelResults);
+            
             }
 
-            $query->where('verified', 1);
-            $modelResults = $query->get();
-            $contacts = $contacts->merge($modelResults);
 
         }
+       
+       
         $contacts  = $contacts->toArray();
         
         
@@ -96,10 +118,23 @@ class CampaignController extends Controller
             $contacts = $filteredContacts;
         }
 
+        $staffContacts = $staffContacts->toArray();
+       
+
         foreach($contacts as $item4)
         {
             Message_Log::create([
                 'mobile' => $item4['mobile'],
+                'template_id'=>$validatedData['template_id'],
+                'communication_id'=>$lastInsertedId,
+
+            ]);
+        }
+
+        foreach($staffContacts as $item5)
+        {
+            Message_Log::create([
+                'mobile' => $item5['Mobile'],
                 'template_id'=>$validatedData['template_id'],
                 'communication_id'=>$lastInsertedId,
 

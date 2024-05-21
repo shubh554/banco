@@ -145,11 +145,12 @@
                                                             <div class="mb-3">
                                                             <label for="example-text-input" class="form-label">Name</label>
                                                             <input class="form-control" type="text" value="" placeholder
-                                                            ="Enter user's name" id="example-text-input"
+                                                            ="Enter audience name" id="example-text-input"
                                                             required data-pristine-required-message="Please Enter Audience Name"
                                                             name = "name"
                                                             >
                                                            </div>
+
                                                            <div class="mb-3">
                                                             <label for="choices-single-default" class="form-label font-size-13 text-muted">State</label>
                                                             <select class="form-control" data-trigger name="state[]"
@@ -174,7 +175,7 @@
                                                             <label for="choices-multiple-remove-button" class="form-label font-size-13 text-muted">Categories</label>
                                                             <select class="form-control" data-trigger
                                                             name="category[]" id="choices-multiple-default"
-                                                            placeholder="This is a placeholder" multiple>
+                                                            placeholder="This is a placeholder"   multiple>
                                                                 <option value="Premium_Dealer_Contact">Premium Dealer</option>
                                                                 <option value="Dealer_Contact">Dealers</option>
                                                                 <option value="Distributor_Contact">Distributors</option>
@@ -197,6 +198,13 @@
                                                                 <option value="Agriculture">Agriculture</option>
                                                              </select>
                                                            </div>
+                                                           <div class="mb-3">
+                                                            <label for="example-text-input" class="form-label">SAP_Code (Comma Separated For Multiple Entries)</label>
+                                                            <input class="form-control" type="text" value="" placeholder
+                                                            ="Enter SAP_Code (Only valid for Banco Staff)" id="example-text-input"
+                                                            required data-pristine-required-message="Please Enter Audience Name"
+                                                            name = "SAP_Code"/>
+                                                           </div>
                                                           <input type="submit" class = "btn btn-primary greenBg"/>
                                                         </form>
                                                      </div>
@@ -204,4 +212,5 @@
                                                     </div><!-- /.modal-dialog -->
                                                 </div><!-- /.modal -->
     
-@endsection
+
+                                                @endsection
