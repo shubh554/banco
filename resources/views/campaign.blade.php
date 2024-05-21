@@ -80,9 +80,11 @@
                             <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
                                 <tr>
+                                    <th>Communication_ID</th>
                                     <th>Name</th>
                                     <th>Template</th>
                                     <th>Audience</th>
+
                                  
                                 </tr>
                                 </thead>
@@ -91,6 +93,7 @@
                                 <tbody>
                                     @foreach($communications as $row)
                                 <tr>
+                                    <td>{{$row->id}}</td>
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->template->name}}</td>
                                     <td>{{$row->audience->name}}</td>  

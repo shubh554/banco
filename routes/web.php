@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\AudienceController;
+use App\Http\Controllers\MessageLogs;
 
 
 
@@ -41,4 +42,5 @@ Route::middleware('auth')->group(function () {
     Route::get('manageDistributorContacts',[ContactController::class,'Distributor']);
     Route::post('addDistributor',[ContactController::class,'AddDistributor']);
     Route::get('delContact/{id}/{table}',[ContactController::class,'DeleteContact']);
+    Route::get('manageLogs',[MessageLogs::class,'index']);
 });
