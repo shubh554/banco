@@ -22,9 +22,19 @@ class CampaignController extends Controller
     public function index()
     {
         
-        $communications = Communication::with(['template', 'audience'])->get();
+        
         $audience = Audience::all();
         $templates = Template::all();
+        $communications = Communication::with([
+            'template',
+            'audience'
+        ])->withCount([
+            'messageLogs',
+            'messageLogs as message_logs_with_status_true_count' => function ($query) {
+                $query->where('status', true);
+            }
+        ])->get();
+        
         return view('campaign',['templates'=>$templates,'communications'=>$communications,'audience' =>$audience]);
     }
 

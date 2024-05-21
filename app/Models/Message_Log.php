@@ -20,4 +20,9 @@ class Message_Log extends Model
     {
         return $this->hasMany(Message_Log::class, 'template_id');
     }
+
+    public function communication()
+    {
+        return $this->belongsTo(Communication::class, 'communication_id');
+    }
 }

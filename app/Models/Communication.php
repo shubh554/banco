@@ -19,4 +19,9 @@ class Communication extends Model
     {
         return $this->belongsTo(Audience::class);
     }
+
+    public function messageLogs()
+    {
+        return $this->hasMany(Message_Log::class, 'communication_id');
+    }
 }

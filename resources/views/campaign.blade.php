@@ -84,6 +84,7 @@
                                     <th>Name</th>
                                     <th>Template</th>
                                     <th>Audience</th>
+                                    <th>Progress</th>
 
                                  
                                 </tr>
@@ -97,6 +98,7 @@
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->template->name}}</td>
                                     <td>{{$row->audience->name}}</td>  
+                                    <td>{{$row->message_logs_with_status_true_count .'/'.$row->message_logs_count}}</td>
                                   
                                 </tr>
                                 @endforeach
