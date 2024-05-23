@@ -113,6 +113,7 @@ class ContactController extends Controller
         while (!$csv->eof()) {
         
             $data = $csv->fgetcsv();
+         
             if (!array_filter($data)) {
                 continue; 
             }
@@ -120,12 +121,13 @@ class ContactController extends Controller
             if (count($data) != 15) {
                 continue;
             }
+           
             $mobile = $data[4];
-            
+          
             if($count)
             {
              
-                if(is_string($mobile) && preg_match('/^\d{10}$/', $mobile))
+                if(ctype_digit($mobile))
                {
                 
                 $contactExists = Premium_Dealer_Contact::where('mobile', $mobile)->exists();
