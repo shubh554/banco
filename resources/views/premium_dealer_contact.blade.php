@@ -86,7 +86,6 @@
                                 <thead>
                                 <tr>
                                     <th>Type</th>
-                                    <th>Dealer Name</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>City</th>
@@ -107,7 +106,6 @@
                                         @foreach($list as $item)
                                         <td>{{$item->product_type}}</td>
                                         <td>{{$item->dealer_name}}</td>
-                                        <td>{{$item->customer_name}}</td>
                                         <td>{{$item->mobile}}</td>
                                         <td>{{$item->city}}</td>
                                         <td>{{$item->state}}</td>
