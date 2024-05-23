@@ -96,6 +96,9 @@ class CampaignController extends Controller
             if (!empty($audiences['city'])) {
                 $query->whereIn('city', $audiences['city']);}
             
+            if (!empty($audiences['product_type'])) {
+                $query->whereIn('product_type', $audiences['product_type']);}
+            
                 $query->where('verified', 1);
                 $modelResults = $query->get();
                 $contacts = $contacts->merge($modelResults);

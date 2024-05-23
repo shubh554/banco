@@ -32,8 +32,11 @@ class AudienceController extends Controller
             'category' => 'required|list|max:100',
             'segment' => 'sometimes|list|max:100',
             'city' => 'sometimes|list|max:255',
-            'SAP_Code' => 'sometimes'
+            'product_type' => 'sometimes|list',
+            'SAP_Code' => 'sometimes|string'
         ]);
+        
+       
         
         $model = new Audience();
         $model->name = $request->name;
@@ -42,6 +45,7 @@ class AudienceController extends Controller
         $model->segment = $request->segment;
         $model->city = $request->city;
         $model->SAP_Code = $request->SAP_Code;
+        $model->product_type = $request->product_type;
         $model->save();
 
         return redirect()->back()->with('success', 'Audience added successfully!');

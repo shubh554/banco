@@ -14,9 +14,10 @@ class Audience extends Model
         'city' => 'array',
         'category' => 'array',
         'segment' => 'array',
+        'product_type' => 'array'
     ];
 
-    protected $fillable =['name','state','city','category','segement'];
+    protected $fillable =['name','state','city','category','segement','product_type'];
 
     public function communications()
     {

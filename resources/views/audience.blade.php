@@ -82,6 +82,7 @@
                                     <th>City</th>
                                     <th>Segment</th>
                                     <th>Category</th>
+                                    <th>Product Type</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -116,7 +117,11 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                    <button type="button" class="btn btn-soft-success waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>
+                                        @foreach($row['product_type'] as $type)    
+                                            <span class="badge bg-primary">{{$type}}</span>
+                                        @endforeach
+                                    </td>
+                                    <td>
                                     <button onclick="window.location=`delAudience/{{$row['id']}}`"  type="button" class="btn btn-soft-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bx bx-block font-size-16 align-middle"></i></button>
                                 </td>
                                 </tr>
@@ -172,6 +177,15 @@
                                                             </select>
                                                         </div>
                                                         <div class="mb-3">
+                                                            <label for="choices-multiple-remove-button" class="form-label font-size-13 text-muted">Product Type</label>
+                                                            <select class="form-control" data-trigger
+                                                            name="product_type[]" id="choices-multiple-default"
+                                                            placeholder="This is a placeholder" multiple>
+                                                                <option value="Rad">Rad</option>
+                                                                <option value="Gsk">Gsk</option>
+                                                            </select>
+                                                           </div>
+                                                        <div class="mb-3">
                                                             <label for="choices-multiple-remove-button" class="form-label font-size-13 text-muted">Categories</label>
                                                             <select class="form-control" data-trigger
                                                             name="category[]" id="choices-multiple-default"
@@ -202,7 +216,6 @@
                                                             <label for="example-text-input" class="form-label">SAP_Code (Comma Separated For Multiple Entries)</label>
                                                             <input class="form-control" type="text" value="" placeholder
                                                             ="Enter SAP_Code (Only valid for Banco Staff)" id="example-text-input"
-                                                            required data-pristine-required-message="Please Enter Audience Name"
                                                             name = "SAP_Code"/>
                                                            </div>
                                                           <input type="submit" class = "btn btn-primary greenBg"/>
