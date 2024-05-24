@@ -38,7 +38,7 @@ class VerifyPremium extends Command
 
             $params=array(
                 'token' => 'o2uznzefj6qyd2oj',
-                'chatId' => $mobile,
+                'chatId' => 9161760875,
                 'nocache' => 'true'
                 );
                 $curl = curl_init();
@@ -58,16 +58,21 @@ class VerifyPremium extends Command
                 
                 $response = curl_exec($curl);
                 $response = json_decode($response);
-               
-                if($response->status == 'valid')
+
+              
+                $status = $response->status ?? null;
+                if($status == 'valid')
                     {
+                       
                         Premium_Dealer_Contact::where('id', $id)->update(['verified' => 1]); 
                     }
                     else
                     {
+                       
                         Premium_Dealer_Contact::where('id', $id)->update(['verified' => 0]);  
                     }
-                  
+            
+              
                   
                 
         }
