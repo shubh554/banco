@@ -117,9 +117,11 @@
                                         @endforeach
                                     </td>
                                     <td>
+                                        @if($row['product_type'])
                                         @foreach($row['product_type'] as $type)    
                                             <span class="badge bg-primary">{{$type}}</span>
                                         @endforeach
+                                        @endif
                                     </td>
                                     <td>
                                     <button onclick="window.location=`delAudience/{{$row['id']}}`"  type="button" class="btn btn-soft-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bx bx-block font-size-16 align-middle"></i></button>
