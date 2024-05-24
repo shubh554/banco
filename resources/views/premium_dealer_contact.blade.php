@@ -86,6 +86,7 @@
                                 <thead>
                                 <tr>
                                     <th>Type</th>
+                                    <th>SAP_Code</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>City</th>
@@ -105,6 +106,7 @@
                                     <tr>
                                         @foreach($list as $item)
                                         <td>{{$item->product_type}}</td>
+                                        <td>{{$item->category}}</td>
                                         <td>{{$item->dealer_name}}</td>
                                         <td>{{$item->mobile}}</td>
                                         <td>{{$item->city}}</td>
