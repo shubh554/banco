@@ -551,7 +551,6 @@
         <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
         <script src="assets/js/pages/form-advanced.init.js"></script>
         <script src="assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
-        <script src="assets/libs/chart.js/Chart.bundle.min.js"></script>
-        <script src="assets/js/pages/seller.init.js"></script>
+        
 </body>
 </html>

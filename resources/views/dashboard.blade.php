@@ -167,10 +167,10 @@
                             <div class="col-xl-3">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title mb-0">Bar Chart</h4>
+                                        <h4 class="card-title mb-0">Messages Sent To Premmium Dealers</h4>
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="bar" height="300" data-colors='["--bs-success"]'></canvas>
+                                       <canvas id="barChart"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -178,33 +178,33 @@
                             <div class="col-xl-3">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title mb-0">Bar Chart</h4>
+                                        <h4 class="card-title mb-0">Messages Sent To Dealers</h4>
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="bar" height="300" data-colors='["--bs-success"]'></canvas>
-                                    </div>
+                                        <canvas id="barChart2"></canvas>
+                                     </div>
                                 </div>
                             </div>
                             <!--end col-->
                             <div class="col-xl-3">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title mb-0">Bar Chart</h4>
+                                        <h4 class="card-title mb-0">Messages Sent To Distributors</h4>
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="bar" height="300" data-colors='["--bs-success"]'></canvas>
-                                    </div>
+                                        <canvas id="barChart3"></canvas>
+                                     </div>
                                 </div>
                             </div>
                             <!--end col-->
                             <div class="col-xl-3">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title mb-0">Bar Chart</h4>
+                                        <h4 class="card-title mb-0">Messages Sent To Retailers</h4>
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="bar" height="300" data-colors='["--bs-success"]'></canvas>
-                                    </div>
+                                        <canvas id="barChart4"></canvas>
+                                     </div>
                                 </div>
                             </div>
                             <!--end col-->
@@ -232,6 +232,130 @@
                     </div>
                 </footer>
             </div>
-         
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{-- chart 1 --}}
+<script>
+ const barCtx = document.getElementById('barChart').getContext('2d');
+        const barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Number of Messages',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        '#1c84ee',
+                        '#1c84ee',
+                        '#1c84ee',
+                        '#1c84ee',
+                        '#1c84ee',
+                        '#1c84ee'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });    
+</script> 
+{{-- chart 2 --}}
+<script>
+    const barCtx2 = document.getElementById('barChart2').getContext('2d');
+           const barChart2 = new Chart(barCtx2, {
+               type: 'bar',
+               data: {
+                   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                   datasets: [{
+                       label: 'Number of Messages',
+                       data: [12, 19, 3, 5, 2, 3],
+                       backgroundColor: [
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee'
+                       ],
+                       borderWidth: 0
+                   }]
+               },
+               options: {
+                   responsive: true,
+                   plugins: {
+                       legend: {
+                           position: 'top'
+                       }
+                   }
+               }
+           });    
+   </script>    
+   {{-- chart 3 --}}
+<script>
+    const barCtx3 = document.getElementById('barChart3').getContext('2d');
+           const barChart3 = new Chart(barCtx3, {
+               type: 'bar',
+               data: {
+                   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                   datasets: [{
+                       label: 'Number of Messages',
+                       data: [12, 19, 3, 5, 2, 3],
+                       backgroundColor: [
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee'
+                       ],
+                       borderWidth: 0
+                   }]
+               },
+               options: {
+                   responsive: true,
+                   plugins: {
+                       legend: {
+                           position: 'top'
+                       }
+                   }
+               }
+           });    
+   </script>   
+  {{-- chart 4 --}}
+<script>
+    const barCtx4 = document.getElementById('barChart4').getContext('2d');
+           const barChart4 = new Chart(barCtx4, {
+               type: 'bar',
+               data: {
+                   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                   datasets: [{
+                       label: 'Number of Messages',
+                       data: [12, 19, 3, 5, 2, 3],
+                       backgroundColor: [
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee',
+                           '#1c84ee'
+                       ],
+                       borderWidth: 0
+                   }]
+               },
+               options: {
+                   responsive: true,
+                   plugins: {
+                       legend: {
+                           position: 'top'
+                       }
+                   }
+               }
+           });    
+   </script>    
 @endsection
        
