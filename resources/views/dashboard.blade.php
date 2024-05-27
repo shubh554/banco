@@ -34,7 +34,7 @@
                                                     <h5 class="mb-3">Premium Dealer Contacts</h5>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="avatar-md">
-                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="#"><i data-feather="eye"></i></a>
+                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="managePremiumDealerContacts"><i data-feather="eye"></i></a>
                                                         </div>
                                                         <p class="fs-1 mb-0">{{$data['premiumDealerContactsCount']}}</p>
                                                     </div>
@@ -52,7 +52,7 @@
                                                     <h5 class="mb-3">Dealer Contacts</h5>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="avatar-md">
-                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="#"><i data-feather="eye"></i></a>
+                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="manageDealerContacts"><i data-feather="eye"></i></a>
                                                         </div>
                                                         <p class="fs-1 mb-0">{{$data['dealerContactsCount']}}</p>
                                                     </div>
@@ -70,7 +70,7 @@
                                                     <h5 class="mb-3">Distributor Contacts</h5>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="avatar-md">
-                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="#"><i data-feather="eye"></i></a>
+                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="manageDealerContacts"><i data-feather="eye"></i></a>
                                                         </div>
                                                         <p class="fs-1 mb-0">{{$data['distributorContactsCount']}}</p>
                                                     </div>
@@ -107,7 +107,7 @@
                                                     <h5 class="mb-3">Mechanic Contacts</h5>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="avatar-md">
-                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="#"><i data-feather="eye"></i></a>
+                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="manageMechanicContacts"><i data-feather="eye"></i></a>
                                                         </div>
                                                         <p class="fs-1 mb-0">{{$data['mechanicContactsCount']}}</p>
                                                     </div>
@@ -126,7 +126,7 @@
                                                     <h5 class="mb-3">Banco Staff Contacts</h5>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="avatar-md">
-                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="#"><i data-feather="eye"></i></a>
+                                                            <a class="avatar-title bg-success-subtle text-success font-size-11 rounded" href="manageBancoStaffContacts"><i data-feather="eye"></i></a>
                                                         </div>
                                                         <p class="fs-1 mb-0">{{$data['bancoStaffContactsCount']}}</p>
                                                     </div>
