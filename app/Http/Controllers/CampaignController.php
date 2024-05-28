@@ -129,6 +129,17 @@ class CampaignController extends Controller
         if(!empty($filteredContacts))
         {
             $contacts = $filteredContacts;
+            $uniqueData = [];
+            $mobileNumbers = [];
+
+            foreach ($contacts as $item) {
+                if (!in_array($item['mobile'], $mobileNumbers)) {
+                    $uniqueData[] = $item;
+                    $mobileNumbers[] = $item['mobile'];
+                }
+            }
+            
+           $contacts = $uniqueData;
         }
 
         $staffContacts = $staffContacts->toArray();
