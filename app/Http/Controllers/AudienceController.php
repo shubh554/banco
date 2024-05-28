@@ -36,7 +36,7 @@ class AudienceController extends Controller
             'segment' => 'sometimes|list|max:100',
             'city' => 'sometimes|list|max:255',
             'product_type' => 'sometimes|list',
-            'SAP_Code' => 'sometimes|string'
+            'SAP_Code' => 'sometimes'
         ]);
         
        
