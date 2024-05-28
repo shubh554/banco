@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::post('addCampaign',[CampaignController::class,'AddCampaign']);
     Route::get('manageAudience',[AudienceController::class,'index']);
     Route::post('addAudience',[AudienceController::class,'add']);
+    Route::post('getAudienceCount',[AudienceController::class,'getCount']);
     Route::get('delAudience/{id}',[AudienceController::class,'delete']);
     Route::get('manageBancoStaffContacts',[ContactController::class,'BancoStaff']);
     Route::post('addBancoStaff',[ContactController::class,'AddBancoStaff']);

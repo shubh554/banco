@@ -125,6 +125,7 @@
                                     </td>
                                     <td>
                                     <button onclick="window.location=`delAudience/{{$row['id']}}`"  type="button" class="btn btn-soft-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bx bx-block font-size-16 align-middle"></i></button>
+                               
                                 </td>
                                 </tr>
                                 @endforeach
@@ -147,7 +148,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                            <form action="addAudience" method="post">
+                                                            <form action="addAudience" method="post" id="audienceForm">
                                                                 @csrf
                                                             <div class="mb-3">
                                                             <label for="example-text-input" class="form-label">Name</label>
@@ -216,16 +217,67 @@
                                                            </div>
                                                            <div class="mb-3">
                                                             <label for="example-text-input" class="form-label">SAP_Code (Comma Separated For Multiple Entries)</label>
-                                                            <input class="form-control" type="text" value="" placeholder
+                                                            <input class="form-control" type="text"  placeholder
                                                             ="Enter SAP_Code (Only valid for Banco Staff)" id="example-text-input"
                                                             name = "SAP_Code"/>
                                                            </div>
                                                           <input type="submit" class = "btn btn-primary greenBg"/>
+                                                          <button type="button" class="btn btn-primary waves-effect waves-light" onclick="getCount()">Get Audience Count</button>
+                                                          <span class="badge bg-primary-subtle text-primary" id="audience_count"></span>
+                                                          <div id="countError" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;margin-top:15px">
+                                                        </div>
                                                         </form>
                                                      </div>
                                                         </div><!-- /.modal-content -->
                                                     </div><!-- /.modal-dialog -->
                                                 </div><!-- /.modal -->
-    
+    <script>
+        function getCount()
+        {
+            document.getElementById('audience_count').innerHTML = 'Please Wait ...';
+            document.getElementById('countError').style.display = 'none';
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var formData = $('#audienceForm').serialize();
 
-                                                @endsection
+        $.ajax({
+            url: "getAudienceCount",
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+                
+                document.getElementById('audience_count').innerHTML = response;
+              
+            },
+            error: function (xhr) {
+                 if(xhr.status === 422)
+                 {
+                    let errors = xhr.responseJSON.errors;
+                    let errorsHtml = '<ul>';
+                    $.each(errors, function (key, value) {
+                        errorsHtml += '<li>' + value[0] + '</li>';
+                    });
+                    errorsHtml += '</ul>';
+                    document.getElementById('audience_count').innerHTML = null;
+                    document.getElementById('countError').style.display = 'block';
+                    document.getElementById('countError').innerHTML = errorsHtml;
+                    
+                 }
+                 if(xhr.status === 421)
+                 {
+                    let errors = xhr.responseJSON.errors;
+                    console.log(errors);
+                    document.getElementById('audience_count').innerHTML = null;
+                    document.getElementById('countError').style.display = 'block';
+                    document.getElementById('countError').innerHTML = errors;
+                 }
+            }
+        });
+        }
+    </script>
+
+@endsection

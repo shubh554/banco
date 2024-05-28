@@ -34,6 +34,8 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" rel="stylesheet">
         
         <link href="assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         
     </head>
 
