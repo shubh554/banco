@@ -9,6 +9,8 @@ use App\Models\City;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Banco_Staff_Contact;
 use Illuminate\Support\Facades\Response;
+use App\Http\Requests\AddAudienceRequest;
+use App\Http\Requests\AudienceCountRequest;
 
 class AudienceController extends Controller
 {
@@ -26,20 +28,8 @@ class AudienceController extends Controller
         return view('audience',$data);
     }
 
-    public function add(Request $request)
+    public function add(AddAudienceRequest $request)
     {
-        
-        $validated = $request->validate([
-            'name' => 'required',
-            'state' => 'sometimes|list|max:255',
-            'category' => 'required|list|max:100',
-            'segment' => 'sometimes|list|max:100',
-            'city' => 'sometimes|list|max:255',
-            'product_type' => 'sometimes|list',
-            'SAP_Code' => 'sometimes'
-        ]);
-        
-       
         
         $model = new Audience();
         $model->name = $request->name;
@@ -54,22 +44,8 @@ class AudienceController extends Controller
         return redirect()->back()->with('success', 'Audience added successfully!');
     }
 
-    public function getCount(Request $request)
+    public function getCount(AudienceCountRequest $request)
     {
-        // Validation
-        $validator = Validator::make($request->all(), [
-            'name' => 'sometimes',
-            'state' => 'sometimes|array|max:255',
-            'category' => 'required|array|max:100',
-            'segment' => 'sometimes|array|max:100',
-            'city' => 'sometimes|array|max:255',
-            'product_type' => 'sometimes|array',
-            'SAP_Code' => 'sometimes'
-        ]);
-    
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
         
         $contacts = collect([]);
         $staffContacts = collect([]);
@@ -140,10 +116,7 @@ class AudienceController extends Controller
             
            $contacts = $uniqueData;
         }
-
-
-    
-        // Output the count
+        
         return count($staffContacts)+count($contacts);
     }
     

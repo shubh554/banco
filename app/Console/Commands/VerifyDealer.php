@@ -66,9 +66,6 @@ class VerifyDealer extends Command
                     {
                         Dealer_Contact::where('id', $id)->update(['verified' => 0]);  
                     }
-                  
-                  
-                
-        }
+         }
     }
 }
