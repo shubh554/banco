@@ -3,7 +3,8 @@
 namespace App\Console\Commands;
 use App\Models\Premium_Dealer_Contact;
 use Illuminate\Console\Command;
-use GuzzleHttp\Client;
+use App\Services\VerifyService;
+
 
 class VerifyPremium extends Command
 {
@@ -13,6 +14,8 @@ class VerifyPremium extends Command
      * @var string
      */
     protected $signature = 'app:verify-premium';
+    protected $VerifyService;
+
 
     /**
      * The console command description.
@@ -24,57 +27,18 @@ class VerifyPremium extends Command
     /**
      * Execute the console command.
      */
+    public function __construct(VerifyService $VerifyService)
+    {
+        parent::__construct();
+        $this->VerifyService = $VerifyService;
+    }
+
     public function handle()
     {
         $firstTwoRecords = Premium_Dealer_Contact::where('verified', 2)->take(2)->get();
         $firstTwoRecords = $firstTwoRecords->toArray(); 
 
-        foreach($firstTwoRecords as $item)
-        {
-            $mobile = $item['mobile'];
-            $id = $item['id'];
-            $verified = false;
-            //checking valid number
+        $test = $this->VerifyService->verify($firstTwoRecords,'premium_dealer_contact'); 
 
-            $params=array(
-                'token' => 'o2uznzefj6qyd2oj',
-                'chatId' => 9161760875,
-                'nocache' => 'true'
-                );
-                $curl = curl_init();
-                
-                curl_setopt_array($curl, array(
-                  CURLOPT_URL => "https://api.ultramsg.com/instance85736/contacts/check?" .http_build_query($params),
-                  CURLOPT_RETURNTRANSFER => true,
-                  CURLOPT_ENCODING => "",
-                  CURLOPT_MAXREDIRS => 10,
-                  CURLOPT_TIMEOUT => 30,
-                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                  CURLOPT_CUSTOMREQUEST => "GET",
-                  CURLOPT_HTTPHEADER => array(
-                    "content-type: application/x-www-form-urlencoded"
-                  ),
-                ));
-                
-                $response = curl_exec($curl);
-                $response = json_decode($response);
-
-              
-                $status = $response->status ?? null;
-                if($status == 'valid')
-                    {
-                       
-                        Premium_Dealer_Contact::where('id', $id)->update(['verified' => 1]); 
-                    }
-                    else
-                    {
-                       
-                        Premium_Dealer_Contact::where('id', $id)->update(['verified' => 0]);  
-                    }
-            
-              
-                  
-                
-        }
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 use App\Models\Mechanic_Contact;
 use Illuminate\Console\Command;
-use GuzzleHttp\Client;
+use App\Services\VerifyService;
 
 class VerifyMechanic extends Command
 {
@@ -13,6 +13,7 @@ class VerifyMechanic extends Command
      * @var string
      */
     protected $signature = 'app:verify-mechanic';
+    protected $VerifyService;
 
     /**
      * The console command description.
@@ -24,41 +25,18 @@ class VerifyMechanic extends Command
     /**
      * Execute the console command.
      */
+
+     public function __construct(VerifyService $VerifyService)
+     {
+         parent::__construct();
+         $this->VerifyService = $VerifyService;
+     }
+
     public function handle()
     {
         $firstTwoRecords = Mechanic_Contact::where('verified', 2)->take(2)->get();
         $firstTwoRecords = $firstTwoRecords->toArray();
 
-        foreach($firstTwoRecords as $item)
-        {
-            $mobile = $item['mobile'];
-            $id = $item['id'];
-            $verified = false;
-
-              $client = new Client();
-                $url = 'https://phone.watverifyapi.live/is-whatsapp-no/get?api_key=API-X-581526571984653594294354442-P-API&phone=91'.$mobile;
-
-                try {
-                    // Make GET request to the API
-                    $response = $client->get($url);
-        
-                    // Get response body as string
-                    $res = $response->getBody()->getContents();
-                    $resultObject = json_decode($res);
-                    if($resultObject->result)
-                    {
-                        Mechanic_Contact::where('id', $id)->update(['verified' => 1]); 
-                    }
-                    else
-                    {
-                        Mechanic_Contact::where('id', $id)->update(['verified' => 0]);  
-                    }
-                  
-                  
-                } catch (\Exception $e) {
-                    // Handle any exceptions or errors
-                    print_r($e);
-                }
-        }
+        $test = $this->VerifyService->verify($firstTwoRecords,'mechanic_contacts'); 
     }
 }
