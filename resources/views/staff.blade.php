@@ -116,8 +116,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-soft-success waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>
-                                            <button onclick="window.location=`#`"  type="button" class="btn btn-soft-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bx bx-block font-size-16 align-middle"></i></button>
+                                            <button onclick="window.location=`delContact/{{$item['id']}}/{{'banco_staff_contacts'}}`"   type="button" class="btn btn-soft-danger waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bx bx-block font-size-16 align-middle"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
