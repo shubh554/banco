@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 use App\Models\Dealer_Contact;
 use Illuminate\Console\Command;
+use App\Services\VerifyService;
 
 class VerifyDealer extends Command
 {
@@ -12,6 +13,7 @@ class VerifyDealer extends Command
      * @var string
      */
     protected $signature = 'app:verify-dealer';
+    protected $VerifyService;
 
     /**
      * The console command description.
@@ -23,8 +25,16 @@ class VerifyDealer extends Command
     /**
      * Execute the console command.
      */
+    public function __construct(VerifyService $VerifyService)
+    {
+        parent::__construct();
+        $this->VerifyService = $VerifyService;
+    }
+
     public function handle()
     {
+        $test = $this->VerifyService->verify('I am from the other class');
+        echo $test;die();
         $firstTwoRecords = Dealer_Contact::where('verified', 2)->take(2)->get();
         $firstTwoRecords = $firstTwoRecords->toArray(); 
 
