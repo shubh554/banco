@@ -35,7 +35,7 @@ class VerifyPremium extends Command
 
     public function handle()
     {
-        $firstTwoRecords = Premium_Dealer_Contact::where('verified', 2)->take(2)->get();
+        $firstTwoRecords = Premium_Dealer_Contact::where('verified', 2)->take(5)->get();
         $firstTwoRecords = $firstTwoRecords->toArray(); 
 
         $test = $this->VerifyService->verify($firstTwoRecords,'premium_dealer_contact'); 
