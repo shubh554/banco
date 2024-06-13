@@ -9,6 +9,7 @@ use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\AudienceController;
 use App\Http\Controllers\MessageLogs;
+use App\Http\Controllers\FieldStaffController;
 
 
 
@@ -44,4 +45,6 @@ Route::middleware('auth')->group(function () {
     Route::post('addDistributor',[ContactController::class,'AddDistributor']);
     Route::get('delContact/{id}/{table}',[ContactController::class,'DeleteContact']);
     Route::get('manageLogs',[MessageLogs::class,'index']);
+    Route::get('manageFieldStaff',[FieldStaffController::class,'index']);
+    Route::post('/addFieldStaffCommunication',[FieldStaffController::class,'add']);
 });

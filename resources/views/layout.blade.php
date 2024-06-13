@@ -336,6 +336,7 @@
                                     <li><a href="manageTemplates" key="t-task-list">Templates</a></li>
                                     <li><a href="manageAudience" key="t-kanban-board">Audience</a></li>
                                     <li><a href="manageCampaigns" key="t-create-task">Communications</a></li>
+                                    <li><a href="manageFieldStaff" key="t-create-task">Field Staff</a></li>
                                     <li><a href="manageLogs" key="task">Message Logs</a></li>
                                 </ul>
                             </li>
