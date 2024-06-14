@@ -194,7 +194,7 @@ class ContactController extends Controller
             if (count($data) != 6) {
                 continue;
             }
-            $mobile = $data[5];
+            $mobile = $data[2];
             
             if($count)
             {
@@ -206,12 +206,12 @@ class ContactController extends Controller
                 
                 if(!$contactExists)
                 DB::table('banco_staff_contacts')->insert([
-                    'Zone' => $data[0],
-                    'State' => $data[1],
-                    'city' => $data[2],
-                    'name' => $data[3],
-                    'SAP_Code' => $data[4],
-                    'mobile' => $data[5],
+                    'Zone' => $data[5],
+                    'State' => $data[4],
+                    'city' => $data[3],
+                    'name' => $data[1],
+                    'SAP_Code' => $data[0],
+                    'mobile' => $data[2],
                      'created_at' => now(),
                     'updated_at' => now(),
                     'verified'=>2
