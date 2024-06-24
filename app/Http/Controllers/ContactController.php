@@ -49,7 +49,7 @@ class ContactController extends Controller
             if (count($data) != 15) {
                 continue;
             }
-            print_r($data);die();
+            
             $mobile = $data[4];
             if($count)
             {
