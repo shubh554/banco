@@ -34,7 +34,7 @@ class VerifyMechanic extends Command
 
     public function handle()
     {
-        $firstTwoRecords = Mechanic_Contact::where('verified', 2)->take(2)->get();
+        $firstTwoRecords = Mechanic_Contact::where('verified', 2)->take(3)->get();
         $firstTwoRecords = $firstTwoRecords->toArray();
 
         $test = $this->VerifyService->verify($firstTwoRecords,'mechanic_contacts'); 

@@ -13,3 +13,4 @@ Schedule::command('app:verify-staff')->everyMinute();
 Schedule::command('app:verify-dealer')->everyMinute();
 Schedule::command('app:verify-distributor')->everyMinute();
 Schedule::command('app:send-message')->everyFiveMinutes();
+Schedule::command('app:verify-mechanic')->everyMinute();
