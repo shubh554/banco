@@ -25,7 +25,7 @@ class SendMessage extends Command
      */
     public function handle()
     {
-        $firstTwoRecords = Message_Log::where('status', false)->take(6)->get();
+        $firstTwoRecords = Message_Log::where('status', false)->take(10)->get();
         
         foreach($firstTwoRecords as $item)
         {
@@ -87,6 +87,6 @@ class SendMessage extends Command
         curl_close($curl);
         
         }
-        Message_Log::where('status', false)->take(6)->update(['status' => true]);
+        Message_Log::where('status', false)->take(10)->update(['status' => true]);
     }
 }
