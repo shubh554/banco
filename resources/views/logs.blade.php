@@ -92,7 +92,7 @@
                                     <td>{{$row->mobile}}</td>
                                     <td>{{$row->communication_id}}</td>
                                     <td>
-                                    @if($row->Status)
+                                    @if($row->status)
                                     <span class="badge bg-info-subtle text-success ">Sent</span>
                                     @else
                                     <span class="badge bg-info-subtle text-info ">Pending</span>
