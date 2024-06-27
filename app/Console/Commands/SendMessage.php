@@ -25,7 +25,7 @@ class SendMessage extends Command
      */
     public function handle()
     {
-        $firstTwoRecords = Message_Log::where('status', false)->take(2)->get();
+        $firstTwoRecords = Message_Log::where('status', false)->take(5)->get();
         
         foreach($firstTwoRecords as $item)
         {
