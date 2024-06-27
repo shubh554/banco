@@ -87,6 +87,6 @@ class SendMessage extends Command
         curl_close($curl);
         
         }
-        Message_Log::where('status', false)->take(10)->update(['status' => true]);
+        Message_Log::where('status', false)->take(12)->update(['status' => true]);
     }
 }
