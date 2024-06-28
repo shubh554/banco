@@ -45,7 +45,7 @@ class ContactController extends Controller
             if (!array_filter($data)) {
                 continue; 
             }
-           
+            print_r($data);die();
             if (count($data) != 15) {
                 continue;
             }
@@ -68,13 +68,13 @@ class ContactController extends Controller
                     'state' => $data[5],
                     'city' => $data[6],
                     'area' => $data[7],
-                    '2-Wheeler' => $data[8],
-                    'Car/MUV' => $data[9],
-                    'LCV/HCV' => $data[10],
-                    'Industrial' => $data[11],
-                    'Genset' => $data[12],
-                    'Agriculture' => $data[13],
-                    'Tractor' => $data[14],
+                    '2-Wheeler' => 'yes',
+                    'Car/MUV' => 'yes',
+                    'LCV/HCV' => 'yes',
+                    'Industrial' => 'yes',
+                    'Genset' => 'yes',
+                    'Agriculture' => 'yes',
+                    'Tractor' => 'yes',
                     'created_at' => now(),
                     'updated_at' => now(),
                     'verified'=>2
@@ -87,7 +87,7 @@ class ContactController extends Controller
             }
             $count++;
         }  
-        return redirect()->back()->with('success', 'Mechanic added successfully!');
+       // return redirect()->back()->with('success', 'Mechanic added successfully!');
       }
     
       public function PremiumDealer(Request $request)

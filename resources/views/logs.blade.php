@@ -98,7 +98,6 @@
                                     <span class="badge bg-info-subtle text-info ">Pending</span>
                                     @endif
                                     </td>  
-                                  
                                 </tr>
                                 @endforeach
                                </tbody>
