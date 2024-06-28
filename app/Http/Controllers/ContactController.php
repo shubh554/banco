@@ -45,7 +45,7 @@ class ContactController extends Controller
             if (!array_filter($data)) {
                 continue; 
             }
-            print_r($data);die();
+            
             if (count($data) != 15) {
                 continue;
             }
